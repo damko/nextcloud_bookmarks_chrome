@@ -47,6 +47,34 @@ $( document ).ready(function(){
     //For now I replace it with this
     CurrentChromeTab(fillForm);
 
+    // $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    //   var target = e.target.attributes.href.value;
+    //   $(target +' input').focus();
+    // })
+
+
+    //focuses search-tags input box
+    //TODO this does not work
+    // $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    //     e.preventDefault();
+    //     var target = $(e.target).attr("href"); // activated tab
+    //     if (target == '#search-bookmarks-tab') {
+    //         $('#search-tags').focus();
+    //     }
+    //     console.log(target);
+    // });
+
+    //Searches for tags when the user hits enter and the search-bookmarks-tab input field has focus
+    $('#search-tags').keypress(function (e) {
+        var key = e.which;
+        // the enter key code
+        if(key == 13) {
+            searchByTags();
+            e.preventDefault();
+            $('#search-bookmarks-tab').show();
+        }
+    });   
+
     $('#search-by-tags-button').click(function (e) {
         searchByTags();
     });
@@ -65,11 +93,8 @@ function searchByTags(){
     chrome.storage.sync.get(['serverURL', 'username', 'password'], function (result) {
         //TODO watch out: after fresh install, before saving the options, "result" could be empty
         var serverEndPointURL = result.serverURL + '/index.php/apps/bookmarks/public/rest/v1/bookmark';
-
         var tags = getTagsArrayFromElement('search-tags');
-
         var conjunction = $("input[name='conjunction']:checked"). val();
-        console.log('conjunction ' + conjunction);
 
         searchBookmarks(serverEndPointURL, result.username, result.password,tags,conjunction);
 
