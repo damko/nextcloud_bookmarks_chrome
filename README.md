@@ -62,8 +62,25 @@ Thank you!
 The NextCloud Bookmarks API is very young and there are some things still to figure out therefore, to make this extension work, you need to temporary replace the official Bookmarks app with my version.
 
 	cd /var/www/nextcloud/apps
-	mv bookmarks bookmarks_ori
-	git clone git@github.com:damko/bookmarks.git
+	#backup your previous app
+	tar zcf bookmarks.tgz bookmarks
+	rm -R bookmarks
+	# anonymously clone my modified app
+	git clone https://github.com/damko/bookmarks
+	#
+	# OR if you a valid git user on your server
+	#git clone git@github.com:damko/bookmarks.git
+	#
+	cd bookmarks
+	git fetch
+	git checkout nextcloud-bookmarks-chrome-0.0.1
+
+Now you need to edit the file `bookmarks/appinfo/application.php` and replace 'damko' with your Nextcloud username (I told you it's not secure :-) )
+
+Then:
+
+	cd ..
+	chown www-data:www-data -fR bookmarks
 
 Anyway, no worries, this is a **temporary thing**. I'm sending PRs hoping that they will be accepted and, in any case, I will change my extension code in order to work with the official Bookmarks app. Once things will sattle down, you will be able to use the discard my Bookmarks repo and use the official app package.
 
@@ -79,7 +96,7 @@ On your pc, followe these step:
 
 * click on the `Developer mode` checkbox if it's not yet checked
 
-* click on `Load unpacked extension` and select the `nextcloud_bookmarks_chrome` directory
+* click on `Load unpacked extension` and select the `nextcloud_bookmarks_chrome/src/` directory
 
 * click `Open`
 
