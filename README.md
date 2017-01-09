@@ -1,14 +1,16 @@
 #Chrome extension for NextCloud Bookmarks
 
-This is a Chrome Extension for [NextCloud Bookmarks](https://github.com/nextcloud/bookmarks), a very popular bookmark application for NextCloud.
+This is a Chrome Extension for [NextCloud Bookmarks](https://github.com/nextcloud/bookmarks), a very popular bookmark application for NextCloud. It allows you to add, search and delete your NextCloud Bookmarks. 
 
-_Note: this extension doesn't work on OwnCloud but you can fork this project and modify the code accordingly_
+This extension does not synchronize your Chrome Bookmarks with NextCloud Bookmarks and it will never perform any kind of synchronization between the browser and NextCloud.
+
+_Note: this extension doesn't work on OwnCloud but you can fork this repo and modify the code accordingly_
 
 ## Available features
 
 * it adds new bookmarks
 * it lists latest bookmarks
-* it searches and shows bookmarks by tag or by a tag combination
+* it searches and shows bookmarks by tag or by a tag combination (like 'tag1 AND tag2 AND tag3' and 'tag1 OR tag2 OR tag3')
 * it deletes a bookmark
 
 ## Missing features
